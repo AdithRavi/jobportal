@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adith Ravi | Careers Portal</title>
+    <title>CareerFlow | Engineering Jobs</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">ENGINEER<span>CAREERS</span></div>
-        <div class="links">
-            <a href="#">Home</a>
-            <a href="#">Jobs</a>
-            <a href="#">About Us</a>
+        <div class="nav-links">
+            <a href="#" class="active">Jobs</a>
+            <a href="#">Companies</a>
+            <a href="#">Activity</a>
         </div>
     </nav>
 
-    <header class="hero">
+    <section class="hero">
         <h1>Work with Innovation</h1>
         <p>Explore engineering roles at the intersection of Tech and Mechanics.</p>
-        <div class="search-container">
-            <input type="text" id="jobSearch" placeholder="Search by role (e.g. Mechanical, AI, UX)...">
-            <button onclick="searchJobs()">Find Jobs</button>
+        
+        <div class="search-box">
+            <input type="text" id="jobSearch" placeholder="Search by role (e.g. Mechanical, UX, AI)...">
+            <button id="searchBtn">Find Jobs</button>
         </div>
-    </header>
+    </section>
 
-    <main class="job-grid" id="jobGrid">
-        </main>
+    <main class="container">
+        <div id="jobGrid" class="job-grid">
+            </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
