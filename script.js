@@ -1,73 +1,46 @@
-1. Expanded Job Database (Added more roles to show variety)
 const jobs = [
-    { title: "UX Research Intern", dept: "Design", location: "Remote", type: "Full-Time" },
-    { title: "Mechanical Design Engineer", dept: "Robotics", location: "Bangalore", type: "Full-Time" },
-    { title: "Junior Python Developer", dept: "Tech", location: "Trivandrum", type: "Internship" },
-    { title: "AI/ML Analyst", dept: "Data Science", location: "Mumbai", type: "Contract" },
-    { title: "Automotive Engineer", dept: "Mechanical", location: "Chennai", type: "Full-Time" },
-    { title: "Product Designer", dept: "Design", location: "Remote", type: "Full-Time" },
-    { title: "Quality Control Lead", dept: "Manufacturing", location: "Pune", type: "Full-Time" },
-    { title: "Frontend Developer", dept: "Tech", location: "Bangalore", type: "Full-Time" },
-    { title: "Robotics Researcher", dept: "Robotics", location: "Hyderabad", type: "Internship" }
+    { title: "Senior Mechanical Engineer", dept: "Systems", loc: "Berlin, DE", type: "Full-Time" },
+    { title: "UX Architecture Lead", dept: "Product", loc: "Remote", type: "Full-Time" },
+    { title: "Robotics Motion Analyst", dept: "R&D", loc: "Bangalore, IN", type: "Contract" },
+    { title: "AI Research Scientist", dept: "Intelligence", loc: "San Francisco, US", type: "Full-Time" },
+    { title: "Mechatronics Intern", dept: "Hardware", loc: "Trivandrum, IN", type: "Internship" }
 ];
 
-const jobGrid = document.getElementById('jobGrid');
-const searchInput = document.getElementById('jobSearch');
-const searchBtn = document.getElementById('searchBtn');
+const grid = document.getElementById('jobGrid');
 
-// 2. Fixed Display Function
-function displayJobs(jobsToRender) {
-    if (jobsToRender.length === 0) {
-        jobGrid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #94969f;">
-                <h3>No jobs found matching your search.</h3>
-                <p>Try searching for "Mechanical" or "Design".</p>
-            </div>`;
-        return;
-    }
-
-    jobGrid.innerHTML = jobsToRender.map(job => `
+function render(data) {
+    grid.innerHTML = data.length ? data.map(j => `
         <div class="job-card">
-            <span class="dept-tag">${job.dept.toUpperCase()}</span>
-            <h3>${job.title}</h3>
-            <div class="job-info">📍 ${job.location} | 💼 ${job.type}</div>
-            <button onclick="applyNow('${job.title}')" class="apply-btn" style="width:100%; cursor:pointer; background:none;">Apply Now</button>
+            <span class="tag">${j.dept}</span>
+            <h3>${j.title}</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">${j.loc} • ${j.type}</p>
+            <div class="apply-link" onclick="openModal('${j.title}')">
+                Apply for Position →
+            </div>
         </div>
-    `).join('');
+    `).join('') : `<p>No openings match your search.</p>`;
 }
 
-// 3. New 'Apply' Functionality
-function applyNow(jobTitle) {
-    // Instead of doing nothing, this now gives the user feedback
-    alert("Thank you for your interest in the " + jobTitle + " position! Redirecting to the application form...");
-    
-    // Optional: Redirect to your LinkedIn or a Google Form
-    // window.location.href = "https://www.linkedin.com/in/your-profile"; 
-}
-// ... (your existing jobs array and displayJobs function) ...
-
-// PASTE IT HERE
-function applyNow(jobTitle) {
-    // This will open your LinkedIn in a new tab
-    window.open("https://www.linkedin.com/in/adithravi", "_blank");
+function openModal(title) {
+    document.getElementById('modalJobTitle').innerText = title;
+    document.getElementById('applyModal').style.display = 'block';
 }
 
-// ... (your search logic and event listeners) ...
-// 4. Search Logic
-function handleSearch() {
-    const query = searchInput.value.toLowerCase().trim();
-    const filtered = jobs.filter(job => 
-        job.title.toLowerCase().includes(query) || 
-        job.dept.toLowerCase().includes(query)
-    );
-    displayJobs(filtered);
+function closeModal() {
+    document.getElementById('applyModal').style.display = 'none';
 }
 
-// Event Listeners
-searchBtn.addEventListener('click', handleSearch);
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleSearch();
-});
+document.getElementById('applicationForm').onsubmit = (e) => {
+    e.preventDefault();
+    closeModal();
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 4000);
+};
 
-// Initial Load
-displayJobs(jobs);
+document.getElementById('searchBtn').onclick = () => {
+    const q = document.getElementById('jobSearch').value.toLowerCase();
+    render(jobs.filter(j => j.title.toLowerCase().includes(q) || j.dept.toLowerCase().includes(q)));
+};
+
+render(jobs);
