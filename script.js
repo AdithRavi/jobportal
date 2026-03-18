@@ -1,4 +1,4 @@
-// 1. Expanded Job Database (Added more roles to show variety)
+1. Expanded Job Database (Added more roles to show variety)
 const jobs = [
     { title: "UX Research Intern", dept: "Design", location: "Remote", type: "Full-Time" },
     { title: "Mechanical Design Engineer", dept: "Robotics", location: "Bangalore", type: "Full-Time" },
