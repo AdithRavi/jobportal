@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerFlow | Adith Ravi</title>
+    <title>CareerFlow | Engineering Job Portal</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -13,7 +13,7 @@
         <div class="nav-links">
             <a href="#" class="active">Jobs</a>
             <a href="#">Companies</a>
-            <a href="#">Activity</a>
+            <a href="https://github.com/AdithRavi" target="_blank">Portfolio</a>
         </div>
     </nav>
 
@@ -21,7 +21,7 @@
         <h1>Work with Innovation</h1>
         <p>Explore engineering roles at the intersection of Tech and Mechanics.</p>
         <div class="search-box">
-            <input type="text" id="jobSearch" placeholder="Search by role (e.g. Mechanical, UX, AI)...">
+            <input type="text" id="jobSearch" placeholder="Search by role (e.g. Mechanical, AI, UX)...">
             <button id="searchBtn">Find Jobs</button>
         </div>
     </header>
@@ -30,6 +30,30 @@
         <div id="jobGrid" class="job-grid">
             </div>
     </main>
+
+    <div id="applyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Apply for <span id="modalJobTitle" style="color:#ff3f6c"></span></h2>
+            <form id="applicationForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="userName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="userEmail" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Upload Resume (PDF)</label>
+                    <input type="file" id="userResume" accept=".pdf" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="successToast" class="toast">Application Sent Successfully! ✓</div>
 
     <script src="script.js"></script>
 </body>
